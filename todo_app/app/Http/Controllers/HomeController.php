@@ -13,6 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        // HomeController.phpが呼び出された際にユーザーがログイン済みかどうかをチェックしています。
         $this->middleware('auth');
     }
 
