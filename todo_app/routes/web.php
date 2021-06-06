@@ -23,4 +23,5 @@ Route::resource("goals.todos", "TodoController")->middleware('auth');
 Route::post('/goals/{goal}/todos/{todo}/sort', 'TodoController@sort')->middleware('auth');
 
 Auth::routes();
+Route::resource("tags", "TagController")->middleware('auth');
 
