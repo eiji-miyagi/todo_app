@@ -10,7 +10,7 @@ class Todo extends Model
 {
     
 
-      public function user()
+    public function user()
         {
            return $this->belongsTo('App\User');
        }
@@ -19,4 +19,8 @@ class Todo extends Model
        {
             return $this->belongsTo('App\Goal');
        }
+    public function tags()
+    {
+       return $this->belongsToMany('App\Tag');
+    }
 }
