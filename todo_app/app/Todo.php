@@ -2,11 +2,13 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
+use \Rutorika\Sortable\SortableTrait;
 
 class Todo extends Model
 {
-    use \Rutorika\Sortable\SortableTrait;
+    
 
       public function user()
         {
