@@ -20,22 +20,7 @@ class GoalController extends Controller
         return response()->json($goals);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $goal = new Goal();
-        $goal->title = request('title');
-        $goal->user_id = Auth::id();
-        $goal->save();
-
-        $goals = Auth::user()->goals;
-
-        return response()->json($goals);
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +30,14 @@ class GoalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $goal = new Goal();
+        $goal->title = request('title');
+        $goal->user_id = Auth::id();
+        $goal->save();
+
+        $goals = Auth::user()->goals;
+
+        return response()->json($goals);
     }
  
     

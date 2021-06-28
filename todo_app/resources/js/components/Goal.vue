@@ -194,6 +194,56 @@ export default {
                 console.log(error)
             })
             this.id = ""
+            },
+            getAllTags: function () {
+            axios.get("/tags").then((response) => {
+                console.log(response)
+                for(let i = 0; i < response.data.length; i++) {
+                    this.tags.push(response.data[i])
+                    console.log(this.tags[i])
+                }
+                console.log(this.tags)
+            }, (error) => {
+                console.log(error)
+            })
+        },
+        addNewTag: function () {
+            axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content');
+            axios.defaults.headers['content-type'] = 'application/json';
+            axios.post("/tags", {title: this.tagTitle}).then((response) => {
+                this.tags.length = 0;
+                for (let i = 0; i < response.data.length; i++) {
+                    this.tags.push(response.data[i])
+                }
+            }, (error) => {
+                console.log(error)
+            })
+            this.tagTitle = ""
+        },
+        editTagTitle: function (id) {
+            axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content');
+            axios.defaults.headers['content-type'] = 'application/json';
+            axios.post(`/tags/${id}`, {title: this.tagTitle, _method: 'patch'}).then((response) => {
+                this.tags.length = 0;
+                for (let i = 0; i < response.data.length; i++) {
+                    this.tags.push(response.data[i])
+                }
+            }, (error) => {
+                console.log(error)
+            })
+            this.tagTitle = ""
+        },
+        deleteTag: function (id) {
+            axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content');
+            axios.defaults.headers['content-type'] = 'application/json';
+
+            axios.post(`/tags/${id}`, {_method: 'delete'}).then((response) => {
+                this.tags = response.data;
+            }, (error) => {
+                console.log(error)
+            })
+        },
+            
         }
     }
 }
