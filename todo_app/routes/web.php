@@ -16,15 +16,17 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource("goals", "GoalController")->middleware('auth');;
+Route::resource("goals", "GoalController")->middleware('auth');
 
 Route::resource("goals.todos", "TodoController")->middleware('auth');
+
 // 作成したTodoを並び替える処理を行うルーティングです。
 Route::post('/goals/{goal}/todos/{todo}/sort', 'TodoController@sort')->middleware('auth');
 
-Auth::routes();
 Route::resource("tags", "TagController")->middleware('auth');
-
+Auth::routes();
 Route::post('/goals/{goal}/todos/{todo}/tags/{tag}', 'TodoController@addTag')->middleware('auth');
 
 Route::delete('/goals/{goal}/todos/{todo}/tags/{tag}', 'TodoController@removeTag')->middleware('auth');
+
+
